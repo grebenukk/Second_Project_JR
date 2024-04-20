@@ -1,24 +1,34 @@
-package model.herbivore;
+package model.predator;
 
 import service.FindFieldService;
+import service.StartService;
 import model.Animal;
 import model.TypeAnimal;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Rabbit extends Animal implements Runnable, Herbivore {
+public class Fox extends Animal implements Runnable, Predator {
     private static int firstStepOneTimeVariable = 1;
 
-    public Rabbit() {
-        weight = TypeAnimal.RABBIT.getWeight();
-        saturation = TypeAnimal.RABBIT.getSaturation();
-        speed = TypeAnimal.RABBIT.getSpeed();
-        imageAnimal = TypeAnimal.RABBIT.getImagineAnimal();
+    public Fox() {
+        weight = TypeAnimal.FOX.getWeight();
+        saturation = TypeAnimal.FOX.getSaturation();
+        speed = TypeAnimal.FOX.getSpeed();
+        imageAnimal = TypeAnimal.FOX.getImagineAnimal();
+        diet = TypeAnimal.FOX.getDiet();
     }
 
     @Override
-    public void mealForHerbivore() {
+    public void mealForPredator(ArrayList<Animal> herbivore) {
+        double percent;
+        for (Animal animal : herbivore) {
+            percent = diet.get(animal.getImageAnimal());
 
+            if (percent >= ThreadLocalRandom.current().nextInt(111)) {
+                StartService.closeMethode(animal);
+            }
+        }
     }
 
     @Override

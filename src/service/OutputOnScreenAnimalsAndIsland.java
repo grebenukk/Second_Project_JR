@@ -4,6 +4,8 @@ import model.Animal;
 
 import java.util.ArrayList;
 
+import static service.StartService.getAllAnimalsList;
+
 public class OutputOnScreenAnimalsAndIsland implements Runnable {
     private static final FunctionalInterface<String> functionalInterface = () -> {
         ArrayList<String> strField = new ArrayList<>();
@@ -22,7 +24,7 @@ public class OutputOnScreenAnimalsAndIsland implements Runnable {
     public  ArrayList<Animal> allAnimals;
 
     public  boolean checkOnTrue(){
-        allAnimals  = StartService.getAllAnimalsList();
+        allAnimals  = getAllAnimalsList();
         for (Animal a: allAnimals){
             if (!a.getAccessToOutput()){
                 return false;

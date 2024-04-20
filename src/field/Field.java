@@ -20,21 +20,21 @@ public class Field {
         numGrass = ThreadLocalRandom.current().nextInt(100);
     }
 
+
     public void outputAnimals() throws InterruptedException {
-        String outputAnimals = "";
+        StringBuilder outputAnimals = new StringBuilder();
         Thread.sleep(100);
-
-        for (int i = 0; i < listAnimals.size(); i++) {
-            outputAnimals += listAnimals.get(i).getImageAnimal();
+        if (!listAnimals.isEmpty()) {
+            outputAnimals.append(listAnimals.get(0).getImageAnimal());
         }
-
-        outputField.set(numField, outputAnimals);
-        for (int i = 0; i < listAnimals.size(); i++) {
-            listAnimals.get(i).setOnTrueAccessToOutput();
+        outputField.set(numField, outputAnimals.toString());
+        for (Animal animal : listAnimals) {
+            animal.setOnTrueAccessToOutput();
         }
-        Thread.sleep(950);
+        Thread.sleep(1000);
         outputField.set(numField, "_ ");
     }
+
 
     public void meal() {
         ArrayList<Animal> predator = new ArrayList<>();
